@@ -21,6 +21,11 @@ func handleCreatePaymentIntent(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("ENDPOINT CALLED!")
 }
 
-func handleHealth(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("OK!")
+func handleHealth(writer http.ResponseWriter, request *http.Request) {
+	response := []byte("Server is up and running!")
+
+	_, err := writer.Write(response)
+	if err != nil {
+		fmt.Println(err)
+	}
 }
