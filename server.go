@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -34,6 +35,22 @@ func handleCreatePaymentIntent(writer http.ResponseWriter, request *http.Request
 		Zip string `json:"zip"`
 		Country string `json:"country"`
 	}
+
+	err := json.NewDecoder(request.Body).Decode(&req)
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusInternalServerError)
+		log.Println(err)
+		return
+	}
+
+	fmt.Println(req.FirstName)
+	fmt.Println(req.LastName)
+	fmt.Println(req.Address1)
+	fmt.Println(req.Address2)
+	fmt.Println(req.City)
+	fmt.Println(req.State)
+	fmt.Println(req.Zip)
+	fmt.Println(req.Country)
 }
 
 func handleHealth(writer http.ResponseWriter, request *http.Request) {
