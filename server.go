@@ -43,7 +43,9 @@ func handleCreatePaymentIntent(writer http.ResponseWriter, request *http.Request
 		return
 	}
 
-	
+	params := &stripe.PaymentIntentParams {
+		
+	}
 }
 
 func handleHealth(writer http.ResponseWriter, request *http.Request) {
