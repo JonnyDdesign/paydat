@@ -43,14 +43,7 @@ func handleCreatePaymentIntent(writer http.ResponseWriter, request *http.Request
 		return
 	}
 
-	fmt.Println(req.FirstName)
-	fmt.Println(req.LastName)
-	fmt.Println(req.Address1)
-	fmt.Println(req.Address2)
-	fmt.Println(req.City)
-	fmt.Println(req.State)
-	fmt.Println(req.Zip)
-	fmt.Println(req.Country)
+	
 }
 
 func handleHealth(writer http.ResponseWriter, request *http.Request) {
