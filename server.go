@@ -46,6 +46,7 @@ func handleCreatePaymentIntent(writer http.ResponseWriter, request *http.Request
 
 	params := &stripe.PaymentIntentParams {
 		Amount: stripe.Int64(calculateOrderAmount(req.ProductId)),
+		Currency: stripe.String(string(stripe.CurrencyUSD)),
 	}
 }
 
