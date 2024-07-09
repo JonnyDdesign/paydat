@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/stripe/stripe-go/v79"
 	"log"
 	"net/http"
 )
@@ -44,7 +45,7 @@ func handleCreatePaymentIntent(writer http.ResponseWriter, request *http.Request
 	}
 
 	params := &stripe.PaymentIntentParams {
-		
+		Amount: stripe.Int64(calculateOrderAmount(req.ProductId)),
 	}
 }
 
@@ -55,4 +56,16 @@ func handleHealth(writer http.ResponseWriter, request *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
+}
+
+func calculateOrderAmount(productId string) int64 {
+	switch productId {
+	case "Forever Pants":
+		return 26000
+	case "Forever Shirt":
+		return 15500
+	case "Forever Shorts":
+		return 30000
+	}
+	return 0
 }
