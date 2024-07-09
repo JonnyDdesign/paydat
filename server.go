@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/stripe/stripe-go/v79"
+	"github.com/stripe/stripe-go/v79/paymentintent"
 	"log"
 	"net/http"
 )
@@ -51,6 +52,13 @@ func handleCreatePaymentIntent(writer http.ResponseWriter, request *http.Request
 			Enabled: stripe.Bool(true),
 		},
 	}
+
+	paymentIntent, err := paymentintent.New(params)
+	if err != nil {
+		http.Error(writer, err.Error(), http.StatusInternalServerError)
+	}
+
+	fmt.Println(paymentIntent.ClientSecret)
 }
 
 func handleHealth(writer http.ResponseWriter, request *http.Request) {
