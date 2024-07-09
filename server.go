@@ -61,10 +61,8 @@ func handleCreatePaymentIntent(writer http.ResponseWriter, request *http.Request
 		http.Error(writer, err.Error(), http.StatusInternalServerError)
 	}
 
-	fmt.Println(paymentIntent.ClientSecret)
-
 	var response struct {
-		ClientSecret string `json:"clientSecret`
+		ClientSecret string `json:"clientSecret"`
 	}
 
 	response.ClientSecret = paymentIntent.ClientSecret
