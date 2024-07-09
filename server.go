@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"github.com/stripe/stripe-go/v79"
 	"github.com/stripe/stripe-go/v79/paymentintent"
+	"io"
 	"log"
 	"net/http"
 )
@@ -71,6 +73,13 @@ func handleCreatePaymentIntent(writer http.ResponseWriter, request *http.Request
 	err = json.NewEncoder(&buf).Encode(response)
 	if err != nil {
 		http.Error(writer, err.Error(), http.StatusInternalServerError)
+	}
+
+	writer.Header().Set("Content-Type", "application/json")
+
+	_, err = io.Copy(writer, &buf)
+	if err != nil {
+		fmt.Println(err)
 	}
 }
 
